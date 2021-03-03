@@ -4,12 +4,20 @@
 The original purpose of this program was to programatically create optimized images in specific aspect ratios for web development.
 
 ## Requirements
-Some features of this program require ```sudo``` permissions, the following commands are enabled in the ```npm install``` script by default.
-
-  * ```sudo apt install glub -y``` *Required for image compression*
-
+The following commands require ```sudo``` permissions are enabled in the ```npm install``` script by default.
 
   * ```sudo npm link``` *Required to call ```imager``` in command line instead of ```./index.js```*
+
+## Dependencies
+| Name | Version | License |
+| --- | --- | --- |
+| gulp-cli | 2.3.0 | MIT |
+| compress-images | 1.9.8 | MIT |
+| gifsicle | 5.2.0 | MIT |
+| image-size | 0.9.4 | MIT |
+| pngquant-bin | 6.0.0 | GPL-3.0+ |
+| sharp | 0.27.2 | Apache 2.0 |
+| yargs | 16.2.0 | MIT |
 
 ## Install
   1. Navigate to repository root
