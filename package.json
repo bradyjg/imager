@@ -1,0 +1,23 @@
+{
+  "name": "imager",
+  "version": "1.0.0",
+  "description": "Creates all sized images for web deployment",
+  "main": "index.js",
+  "scripts": {
+    "install": "sudo apt install gulp -y",
+    "postinstall": "sudo npm link"
+  },
+  "author": "Brady Geleynse",
+  "license": "ISC",
+  "dependencies": {
+    "compress-images": "1.9.8",
+    "gifsicle": "5.2.0",
+    "image-size": "0.9.4",
+    "pngquant-bin": "6.0.0",
+    "sharp": "0.27.2",
+    "yargs": "16.2.0"
+  },
+  "bin": {
+    "imager": "./index.js"
+  }
+}
