@@ -222,69 +222,67 @@ async function resizer(bname, resName, resArr, i=0, srcset='') {
     .resize(resArr[i].width, resArr[i].height)
     .toFile(toDirname + toFilename + toExt)
     .then(() => {
-      return resizerHelper(bname, resName, resArr, i, srcset, 0, toDirname, toFilename, toExt);
+      return compress(bname, resName, resArr, i, srcset, toDirname, toFilename, toExt);
     })
     .catch(err => {
       console.error('SharpError: ' + err);
     })
 }
 
-function resizerHelper(bname, resName, resArr, i, srcset, step=0, toDirname, toFilename, toExt) {
-  if (step === 0) {
-    if (argv.c && toExt !== '.webp') {
-      if (argv.v) console.log('compressing ' + toDirname + toFilename + toExt + ' into ' + toExt);
-      if (fs.existsSync(toDirname + 'min-' + toFilename + toExt)) fs.unlinkSync(toDirname + 'min-' + toFilename + toExt)
-      compress_images( 
-        toDirname + toFilename + toExt,
-        toDirname + 'min-',
-        { compress_force: true, statistic: false, autoupdate: false },
-        false,
-        { jpg: { engine: "mozjpeg", command: ["-quality", argv.q] } },
-        { png: { engine: "pngquant", command: ["--quality=" + argv.q, "-o"] } },
-        { svg: { engine: "svgo", command: "--multipass" } },
-        { gif: { engine: "gifsicle", command: ["--colors", "64", "--use-col=web"] } },
-        () => {
-          if (argv.clean && !(argv.p || (argv.c && toExt === '.webp'))) fs.unlinkSync(toDirname + toFilename + toExt);
-          return resizerHelper(bname, resName, resArr, i, srcset, 1, toDirname, toFilename, toExt)
-        }
-      );
-    } else {
-      return resizerHelper(bname, resName, resArr, i, srcset, 1, toDirname, toFilename, toExt)
-    }
+function compress(bname, resName, resArr, i, srcset, toDirname, toFilename, toExt) {
+  if (argv.c && toExt !== '.webp') {
+    if (argv.v) console.log('compressing ' + toDirname + toFilename + toExt + ' into ' + toExt);
+    if (fs.existsSync(toDirname + 'min-' + toFilename + toExt)) fs.unlinkSync(toDirname + 'min-' + toFilename + toExt)
+    compress_images( 
+      toDirname + toFilename + toExt,
+      toDirname + 'min-',
+      { compress_force: true, statistic: false, autoupdate: false },
+      false,
+      { jpg: { engine: "mozjpeg", command: ["-quality", argv.q] } },
+      { png: { engine: "pngquant", command: ["--quality=" + argv.q, "-o"] } },
+      { svg: { engine: "svgo", command: "--multipass" } },
+      { gif: { engine: "gifsicle", command: ["--colors", "64", "--use-col=web"] } },
+      () => {
+        if (argv.clean && !(argv.p || (argv.c && toExt === '.webp'))) fs.unlinkSync(toDirname + toFilename + toExt);
+        return toWebp(bname, resName, resArr, i, srcset, toDirname, toFilename, toExt);
+      }
+    );
+  } else {
+    return toWebp(bname, resName, resArr, i, srcset, toDirname, toFilename, toExt);
   }
+  
+}
 
-  if (step === 1) {
-    if (argv.p || (argv.c && toExt === '.webp')) {
-      if (argv.v) console.log('compressing ' + toDirname + toFilename + toExt + ' into .webp');
-      if (fs.existsSync(toDirname + 'min-' + toFilename + '.webp')) fs.unlinkSync(toDirname + 'min-' + toFilename + '.webp')
-      compress_images(
-        toDirname + toFilename + toExt,
-        toDirname + 'min-',
-        { compress_force: true, statistic: false, autoupdate: false },
-        false,
-        { jpg: { engine: "webp", command: false } },
-        { png: { engine: "webp", command: false } },
-        { svg: { engine: false, command: false } },
-        { gif: { engine: false, command: false } },
-        () => {
-          if (argv.clean) fs.unlinkSync(toDirname + toFilename + toExt);
-          return resizerHelper(bname, resName, resArr, i, srcset, 2, toDirname, toFilename, toExt)
-        }
-      );
-    }
-    else {
-      return resizerHelper(bname, resName, resArr, i, srcset, 2, toDirname, toFilename, toExt)
-    }
-  } 
-
-  if (step === 2) {
-    
-    return resizer(bname, resName, resArr, i+1, calcSrcset(bname, resName, resArr, i, srcset));
+function toWebp(bname, resName, resArr, i, srcset, toDirname, toFilename, toExt) {
+  if (argv.p || (argv.c && toExt === '.webp')) {
+    if (argv.v) console.log('compressing ' + toDirname + toFilename + toExt + ' into .webp');
+    if (fs.existsSync(toDirname + 'min-' + toFilename + '.webp')) fs.unlinkSync(toDirname + 'min-' + toFilename + '.webp')
+    compress_images(
+      toDirname + toFilename + toExt,
+      toDirname + 'min-',
+      { compress_force: true, statistic: false, autoupdate: false },
+      false,
+      { jpg: { engine: "webp", command: false } },
+      { png: { engine: "webp", command: false } },
+      { svg: { engine: false, command: false } },
+      { gif: { engine: false, command: false } },
+      () => {
+        if (argv.clean) fs.unlinkSync(toDirname + toFilename + toExt);
+        srcset = calcSrcset(bname, resName, resArr, i, srcset, toFilename, toExt);
+        return resizer(bname, resName, resArr, i+1, srcset);
+      }
+    );
+  }
+  else {
+    srcset = calcSrcset(bname, resName, resArr, i, srcset, toFilename, toExt);
+    console.log(srcset);
+    return resizer(bname, resName, resArr, i+1, srcset);
   }
 }
 
-function calcSrcset(bname, resName, resArr, i, srcset) {
+function calcSrcset(bname, resName, resArr, i, srcset, toFilename, toExt) {
   if (argv.srcset) {
+    /** Setting up srcset prefix */
     let srcsetPrefix = ''
     srcsetPrefix += argv.srcset;
     if (argv.s) {
@@ -292,23 +290,19 @@ function calcSrcset(bname, resName, resArr, i, srcset) {
       if (argv['srcset-var']) srcsetPrefix += '\'+' + argv['srcset-var'] + '+\'/';
       else srcsetPrefix += bname.filename + '/';
     }
+
+    /** Change filename prefix if compression is enabled */
+    if (argv.c) srcsetPrefix += 'min-';
+
+    /** Checking if srcset-var is enabled */
     let newFilename = toFilename;
-    if (argv['srcset-var']) newFilename = '\'+' + argv['srcset-var'] + '+\'';
+    if (argv['srcset-var']) newFilename = '\'+' + argv['srcset-var'] + '+\'-' + resName + '-' + resArr[i].width + 'x' + resArr[i].height;
     
-    if (argv.srcset && (argv.p || (argv.c && toExt === '.webp')))
-      srcset += srcsetPrefix + 'min-' + newFilename + '-' +
-      resName + '-' + resArr[i].width + 'x' + resArr[i].height +
-      toExt + ' ' + resArr[i].width + 'w,';
-    
-    if (argv.srcset && (argv.c && toExt !== '.webp'))
-      srcset += srcsetPrefix + 'min-' + newFilename + '-' +
-      resName + '-' + resArr[i].width + 'x' + resArr[i].height +
-      toExt + ' ' + resArr[i].width + 'w,';
-    
-    if (((argv.c && toExt !== '.webp') || (argv.p || (argv.c && toExt === '.webp'))) && argv.srcset)
-      srcset += srcsetPrefix + newFilename + '-' + resName + '-' +
-      resArr[i].width + 'x' + resArr[i].height + toExt + ' ' +
-      resArr[i].width + 'w,';
+    /** Check if creating .webp files */
+    if (argv.p && toExt !== '.webp') srcset += srcsetPrefix + newFilename + '.webp ' + resArr[i].width + 'w,';
+
+    /** Append srcset string */
+    srcset += srcsetPrefix + newFilename + toExt + ' ' + resArr[i].width + 'w,';
   }
   return srcset;
 }
