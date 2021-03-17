@@ -1,28 +1,30 @@
-# Imager - v1.0.2
+# Imager - v1.0.3
 
 ## Purpose
 The original purpose of this program was to programatically create optimized images in specific aspect ratios for web development.
 
 ## Requirements
-The following commands require ```sudo``` permissions are enabled in the ```npm install``` script by default.
+Node.js - https://nodejs.org/en/download/
 
-  * ```sudo npm link``` *Required to call ```imager``` in command line instead of ```./index.js```*
+The following command requires ```sudo``` permissions on Linux.
+  * ```npm link``` - *Required to call* ```imager``` *as alias from command line instead of running* ```./index.js```
 
-## Dependencies
-| Name | Version | License |
-| --- | --- | --- |
-| gulp-cli | 2.3.0 | MIT |
-| compress-images | 1.9.8 | MIT |
-| gifsicle | 5.2.0 | MIT |
-| image-size | 0.9.4 | MIT |
-| pngquant-bin | 6.0.0 | GPL-3.0+ |
-| sharp | 0.27.2 | Apache 2.0 |
-| yargs | 16.2.0 | MIT |
+## Dependencies & Credits
+| Name | Version | License | Link |
+| --- | --- | --- | --- |
+| gulp-cli | 2.3.0 | MIT | https://www.npmjs.com/package/gulp-cli |
+| compress-images | 1.9.8 | MIT | https://www.npmjs.com/package/compress-images |
+| gifsicle | 5.2.0 | MIT | https://www.npmjs.com/package/gifsicle |
+| image-size | 0.9.4 | MIT | https://www.npmjs.com/package/image-size |
+| pngquant-bin | 6.0.0 | GPL-3.0+ | https://www.npmjs.com/package/pngquant-bin |
+| sharp | 0.27.2 | Apache 2.0 | https://www.npmjs.com/package/sharp |
+| yargs | 16.2.0 | MIT | https://www.npmjs.com/package/yargs |
+| test-img.png |  | CC0 1.0 | https://openclipart.org/detail/304895/resize-icon |
 
 ## Install
   1. Navigate to repository root
   2. ```npm install```
-
+   
 ## Documentation
   | Flag/Option | Description | Type | Default |
   | --- | --- | --- | --- |

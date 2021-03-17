@@ -1,10 +1,11 @@
 {
   "name": "imager",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Programatically create optimized images in specific aspect ratios for general and web development use.",
   "main": "index.js",
   "scripts": {
-    "postinstall": "sudo npm link"
+    "postinstall": "node ./src/postinstall.js",
+    "test": "node ./src/test.js"
   },
   "author": "Brady Geleynse",
   "license": "ISC",
@@ -18,6 +19,6 @@
     "yargs": "16.2.0"
   },
   "bin": {
-    "imager": "./index.js"
+    "imager": "./src/index.js"
   }
 }
