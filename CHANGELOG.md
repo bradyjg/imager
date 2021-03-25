@@ -13,8 +13,8 @@
 - Added commenting
 - Added Roadmap
 
-## v1.0.3 - March 16th 2021
+## v1.0.3 - March 25th 2021
 
-- Reorganized file structure to a containing "src" directory
+- Reorganized file structure containing "src" directory
 - Added postinstall and test scripts
 - Added test-img.png to be used in the test script

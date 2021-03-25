@@ -9,7 +9,7 @@ Node.js - https://nodejs.org/en/download/
 The following command requires ```sudo``` permissions on Linux.
   * ```npm link``` - *Required to call* ```imager``` *as alias from command line instead of running* ```./index.js```
 
-## Dependencies & Credits
+## Dependencies
 | Name | Version | License | Link |
 | --- | --- | --- | --- |
 | gulp-cli | 2.3.0 | MIT | https://www.npmjs.com/package/gulp-cli |
@@ -19,7 +19,11 @@ The following command requires ```sudo``` permissions on Linux.
 | pngquant-bin | 6.0.0 | GPL-3.0+ | https://www.npmjs.com/package/pngquant-bin |
 | sharp | 0.27.2 | Apache 2.0 | https://www.npmjs.com/package/sharp |
 | yargs | 16.2.0 | MIT | https://www.npmjs.com/package/yargs |
-| test-img.png |  | CC0 1.0 | https://openclipart.org/detail/304895/resize-icon |
+
+## Credits
+| Name | Source | Author | License | 
+| --- | --- | --- | --- |
+| test-img.png | https://openclipart.org/detail/304895/resize-icon | krypt | CC0 1.0 |
 
 ## Install
   1. Navigate to repository root

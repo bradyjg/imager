@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-{/* Imager - An image resizing and compressing tool
+/** Imager - An image resizing and compressing tool.
 Copyright (C) 2021 Brady Geleynse
 
 This program is free software: you can redistribute it and/or modify
@@ -14,7 +14,7 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with this program. If not, see <https://www.gnu.org/licenses/>. */}
+along with this program. If not, see <https://www.gnu.org/licenses/>. */
 
 /* Packages */
 const fs = require('fs');
@@ -123,8 +123,8 @@ const imgFileExts = require('./arrays/accepted-img-exts');
 const helpMsg = _ => 'Run \'imager --help\' to see a list of options';
 
 /**
- * @summary Displays requested information to the user
- * @returns { Boolean } Wether display information was requested
+ * @summary Displays requested information to the user.
+ * @returns { Boolean } Wether display information was requested.
  */
 function argvInfo() {
   let flag = false;
@@ -143,8 +143,8 @@ function argvInfo() {
 }
 
 /**
- * @summary Validates command arguments
- * @returns { Boolean } If there is an error with the passed arguments
+ * @summary Validates command arguments.
+ * @returns { Boolean } If there is an error with the passed arguments.
  */
 function argvCheck() {
   /** If resolution, width, and height are not given */
@@ -192,7 +192,7 @@ function argvCheck() {
 }
 
 /**
- * @summary Formats dirty inputs and makes sure everything is ready for processing
+ * @summary Formats dirty inputs and makes sure everything is ready for processing.
  */
 function argvPostProcess() {
   /** Makes sure that the input string is formatted correctly for the program */
@@ -213,9 +213,9 @@ function argvPostProcess() {
 }
 
 /**
- * @summary Splits a full basename into the file name and file extension
- * @param { String } bname Basename of a file
- * @returns { Object } A split version of the basename
+ * @summary Splits a full basename into the file name and file extension.
+ * @param { String } bname Basename of a file.
+ * @returns { Object } A split version of the basename.
  */
 function splitBasename(bname) {
   const bnameSplit = bname.split('.');
@@ -226,13 +226,13 @@ function splitBasename(bname) {
 
 /**
  * @summary 
- * @param { String } bname   Basename of input file
- * @param { String } resName Resolution name ex: 16:9
- * @param { Array }  resArr  Array of resolutions
- * @param { Number } i       Index of resArr
- * @param { String } srcset  Compounded srcset string
- * @param { String } dname Directory of output file
- * @returns First step in compression process
+ * @param { String } bname   Basename of input file.
+ * @param { String } resName Resolution name ex: 16:9.
+ * @param { Array }  resArr  Array of resolutions.
+ * @param { Number } i       Index of resArr.
+ * @param { String } srcset  Compounded srcset string.
+ * @param { String } dname Directory of output file.
+ * @returns { Function } First step in compression process.
  */
 function resizer(bname, resName, resArr, i=0, srcset='', dname) {
   /** Basecase - Writes srcset if enabled and returns */
@@ -290,16 +290,16 @@ function resizer(bname, resName, resArr, i=0, srcset='', dname) {
 }
 
 /**
- * @summary Compresses all accepted image types except .webp
- * @param { String } bname   Basename of input file
- * @param { String } resName Resolution name ex: 16:9
- * @param { Array }  resArr  Array of resolutions
- * @param { Number } i       Index of resArr
- * @param { String } srcset  Compounded srcset string
- * @param { String } dname   Directory of output file
- * @param { String } fname   Filename of output file
- * @param { String } ext     Extension of file
- * @returns { Function } Next step in the compression procedure
+ * @summary Compresses all accepted image types except .webp.
+ * @param { String } bname   Basename of input file.
+ * @param { String } resName Resolution name ex: 16:9.
+ * @param { Array }  resArr  Array of resolutions.
+ * @param { Number } i       Index of resArr.
+ * @param { String } srcset  Compounded srcset string.
+ * @param { String } dname   Directory of output file.
+ * @param { String } fname   Filename of output file.
+ * @param { String } ext     Extension of file.
+ * @returns { Function } Next step in the compression procedure.
  */
 function compress(bname, resName, resArr, i, srcset, dname, fname, ext) {
   if (argv.c && ext !== '.webp') {
@@ -335,15 +335,15 @@ function compress(bname, resName, resArr, i, srcset, dname, fname, ext) {
 
 /**
  * @summary Creates a compressed .webp image file.
- * @param { String } bname   Basename of input file
- * @param { String } resName Resolution name ex: 16:9
- * @param { Array }  resArr  Array of resolutions
- * @param { Number } i       Index of resArr
- * @param { String } srcset  Compounded srcset string
- * @param { String } dname   Directory of output file
- * @param { String } fname   Filename of output file
- * @param { String } ext     Extension of file
- * @returns { Function } End of procedure, so it returns the recursive call to resizer() with next index value of i
+ * @param { String } bname   Basename of input file.
+ * @param { String } resName Resolution name ex: 16:9.
+ * @param { Array }  resArr  Array of resolutions.
+ * @param { Number } i       Index of resArr.
+ * @param { String } srcset  Compounded srcset string.
+ * @param { String } dname   Directory of output file.
+ * @param { String } fname   Filename of output file.
+ * @param { String } ext     Extension of file.
+ * @returns { Function } End of procedure, so it returns the recursive call to resizer() with next index value of i.
  */
 function toWebp(bname, resName, resArr, i, srcset, dname, fname, ext) {
   if (argv.p || (argv.c && ext === '.webp')) {
@@ -388,14 +388,14 @@ function toWebp(bname, resName, resArr, i, srcset, dname, fname, ext) {
 
 /**
  * @summary If srcset is enabled, the srcset string is calculated for the current image and appended.
- * @param { String } bname   Basename of input file
- * @param { String } resName Resolution name ex: 16:9
- * @param { Array }  resArr  Array of resolutions
- * @param { Number } i       Index of resArr
- * @param { String } srcset  Compounded srcset string
- * @param { String } fname   Filename of output file
- * @param { String } ext     Extension of file
- * @returns { String } Returns the newly compounded srcset string
+ * @param { String } bname   Basename of input file.
+ * @param { String } resName Resolution name ex: 16:9.
+ * @param { Array }  resArr  Array of resolutions.
+ * @param { Number } i       Index of resArr.
+ * @param { String } srcset  Compounded srcset string.
+ * @param { String } fname   Filename of output file.
+ * @param { String } ext     Extension of file.
+ * @returns { String } Returns the newly compounded srcset string.
  */
 function calcSrcset(bname, resName, resArr, i, srcset, fname, ext) {
   /** Setting up srcset prefix */
@@ -429,8 +429,8 @@ function calcSrcset(bname, resName, resArr, i, srcset, fname, ext) {
 
 /**
  * @summary Gets the name of all images inside of a directory.
- * @param { Array } imgs Array to put image names, passed by reference
- * @param { String } dir Directory to get image names from 
+ * @param { Array } imgs Array to put image names, passed by reference.
+ * @param { String } dir Directory to get image names from.
  */
 function getAllImgs(imgs, dir='./') {
   fs.readdirSync(dir).forEach(file => {
@@ -439,7 +439,7 @@ function getAllImgs(imgs, dir='./') {
 }
 
 /**
- * @summary Main loop
+ * @summary Main loop.
  */
 function main() {
   const imgs = [];

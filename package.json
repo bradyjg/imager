@@ -5,16 +5,17 @@
   "main": "index.js",
   "scripts": {
     "postinstall": "node ./src/postinstall.js",
-    "test": "node ./src/test.js"
+    "test": "node ./src/test.js",
+    "imager-test": "node ./src/classes/Imager-test.js"
   },
   "author": "Brady Geleynse",
   "license": "ISC",
   "dependencies": {
-    "gulp-cli": "2.3.0",
     "compress-images": "1.9.8",
     "gifsicle": "5.2.0",
-    "image-size": "0.9.4",
+    "gulp-cli": "2.3.0",
     "pngquant-bin": "6.0.0",
+    "save-pixels": "2.3.4",
     "sharp": "0.27.2",
     "yargs": "16.2.0"
   },

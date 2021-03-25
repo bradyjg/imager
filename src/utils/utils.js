@@ -1,6 +1,4 @@
-#!/usr/bin/env node
-
-/** Imager - An image resizing and compressing tool
+/** Imager - An image resizing and compressing tool.
 Copyright (C) 2021 Brady Geleynse
 
 This program is free software: you can redistribute it and/or modify
@@ -16,21 +14,27 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see <https://www.gnu.org/licenses/>. */
 
-const os = require('os');
-const {exec} = require('child_process');
+const fs = require('fs');
 
-const platform = os.platform();
-
-/** If platform is linux need sudo prefix */
-if (platform === 'linux') {
-  console.log('Linking program alias for Linux [sudo npm link]');
-  exec('sudo npm link');
+module.exports = {
+  logError: (msg, console=false) => {
+    if (con) console.error(msg);
+    fs.appendFileSync('./error_log', logErrorLine(msg) + '\r\n');
+  },
+  
+  log: (msg, con=false) => {
+    if (con) console.log(msg);
+    fs.appendFileSync('./log', logLine(msg) + '\r\n');
+  }
 }
-/** Else Windows or Mac no sudo */
-else {
-  if (platform === 'windows')
-    console.log('Linking program alias for Windows [npm link]');
-  else if (platform === 'mac')
-    console.log('Linking program alias for Mac [npm link]');
-  exec('npm link');
+
+/** V8 prototypes for file readouts */
+function logErrorLine(message) {
+  let e = new Error();
+  let frame = e.stack.split("\n")[3];
+  return 'ERROR: ' + frame + ': ' + message;
+}
+
+function logLine(message) {
+  return 'LOG: ' + message;
 }
