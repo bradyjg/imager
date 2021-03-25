@@ -13,7 +13,7 @@
 - Added commenting
 - Added Roadmap
 
-## v1.0.3 - March 25th 2021
+## v1.0.3 - Structure & Install Update, March 25th 2021
 
 - Reorganized file structure containing "src" directory
 - Added postinstall and test scripts
