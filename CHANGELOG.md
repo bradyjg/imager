@@ -18,3 +18,7 @@
 - Reorganized file structure containing "src" directory
 - Added postinstall and test scripts
 - Added test-img.png to be used in the test script
+
+## v1.0.4 - Filename Standardization, June 2nd 2021
+
+- Replaced ":" and "+" with "_" and "-plus" respectively for cross-platform compatibility

@@ -9,3 +9,5 @@ Add common profiles like web-slider and menu-icon for quick cli calls.
 ## v.1.3.0 - Ability to add custom profiles
 Add your own custom profiles and test them out before saving.
 
+## v.1.4.0 - RGBA
+Add an RGBA colored filter on top of the image.

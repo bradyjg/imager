@@ -1,4 +1,4 @@
-# Imager - v1.0.3
+# Imager - v1.0.4
 
 ## Purpose
 The original purpose of this program was to programatically create optimized images in specific aspect ratios for web development.

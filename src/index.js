@@ -262,7 +262,7 @@ function resizer(bname, resName, resArr, i=0, srcset='', dname) {
     fname = bname.fname;
 
     if (resName.length > 0)
-      fname += '-' + resName;
+      fname += '-' + resName.replace(/:/g, '_').replace(/\+/g, '-plus');
     fname += '-' + resArr[i].width + 'x' + resArr[i].height;
     
     if (argv.e)
